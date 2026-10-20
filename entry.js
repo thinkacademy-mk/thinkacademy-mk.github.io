@@ -37,8 +37,17 @@
   }
 
   function reflectTarget(target) {
-    const path = target.pathname.slice(siteRoot.pathname.length);
-    const branded = '/' + path + target.search + target.hash;
+    const path = allowedPath(target.pathname.slice(siteRoot.pathname.length));
+    const route = /^reports\/(?:weeks\/([0-9]{12})|week-([12])\/(?:level-(1-2|3-4|5-6)\/)?([0-9]{12}))\/$/.exec(path);
+    const params = new URLSearchParams(target.search);
+    ['uid', 'student', 'studentNumber', 'week', 'level'].forEach(key => params.delete(key));
+    if (route) {
+      params.set('uid', route[1] || route[4]);
+      if (route[2]) params.set('week', route[2]);
+      if (route[3]) params.set('level', route[3]);
+    }
+    const query = params.toString();
+    const branded = '/' + (query ? '?' + query : '') + target.hash;
     if (location.pathname + location.search + location.hash !== branded) {
       history.replaceState(null, '', branded);
     }
