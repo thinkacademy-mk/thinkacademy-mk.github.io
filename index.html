@@ -1,31 +1,22 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self'; frame-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
-  <title>TEST · Math Kangaroo Weekly Reports</title>
-  <script src="./portal.js" defer></script><link rel="stylesheet" href="./portal.css"><link rel="stylesheet" href="./demo.css"></head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fffaf0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; frame-src https://emily0huayun.github.io; style-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>Math Kangaroo Weekly Reports · Think Academy</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
 <body>
-  <aside class="demo-banner" role="note"><strong>測試資料 · TEST DATA</strong><span>僅含兩位虛構學生，用於測試家長查詢與報告閱讀流程。</span></aside><main class="portal-shell">
-    <header class="portal-header">
-      <img class="brand-logo" src="./logo.png" alt="Think Academy US Online" width="1024" height="95">
-    </header>
-    <section class="lookup-section" aria-labelledby="portal-title">
-      <div class="intro">
-        <h1 id="portal-title">Math Kangaroo Geometry<br>Daily Challenge Report</h1>
-      </div>
-      <form class="lookup-card" id="lookup-form" novalidate>
-        <label for="student-number">Student Number</label>
-        <p class="field-hint" id="student-number-hint">Enter one of the two synthetic 12-digit Student Numbers below.</p>
-        <div class="lookup-row">
-          <input id="student-number" name="student-number" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" placeholder="12-digit student number" aria-describedby="student-number-hint lookup-message" maxlength="32" required>
-          <button class="lookup-button" id="lookup-button" type="submit">View Report <span aria-hidden="true">→</span></button>
-        </div>
-        <p class="lookup-message" id="lookup-message" role="status" aria-live="polite"></p>
-      </form>
-      <section class="number-guide" aria-labelledby="number-guide-title"><div><h2 id="number-guide-title">測試用 Student Number</h2><p class="demo-instruction">請使用下方兩個虛構 UID，按「View Report」進入週次選擇與完整報告。也可以點選 UID 填入。</p><div class="demo-ids"><button type="button" class="demo-id" data-demo-uid="990000000001"><span><b>Test Student A</b><small>Week 2 · completed sample</small></span><code>990000000001</code></button><button type="button" class="demo-id" data-demo-uid="990000000002"><span><b>Test Student B</b><small>Week 2 · catch-up sample</small></span><code>990000000002</code></button></div><p class="demo-note">所有姓名、UID、題目、分數、出勤與排名均為測試資料。不接受真實學號，不連接正式學生資料或開啟統計。</p></div></section></section>
-    <footer class="portal-footer">Think Academy US Online · Math Kangaroo Daily Challenge</footer>
-  </main>
+  <iframe
+    class="report-frame"
+    src="https://emily0huayun.github.io/math-kangaroo-reports/"
+    title="Math Kangaroo 家長報告查詢與閱讀"
+    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+    referrerpolicy="no-referrer"
+  ></iframe>
+  <a class="fallback-link" href="https://emily0huayun.github.io/math-kangaroo-reports/" target="_blank" rel="noopener noreferrer" aria-label="在新分頁開啟 Math Kangaroo 報告網站">另開報告頁 <span aria-hidden="true">↗</span></a>
 </body>
 </html>

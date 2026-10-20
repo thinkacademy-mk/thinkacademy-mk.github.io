@@ -1,0 +1,44 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #fffaf0;
+}
+
+.report-frame {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  border: 0;
+}
+
+.fallback-link {
+  position: fixed;
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(10px, env(safe-area-inset-bottom));
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 32px;
+  box-sizing: border-box;
+  padding: 6px 11px;
+  border: 1px solid #dedacb;
+  border-radius: 8px;
+  color: #6f613e;
+  background: #fffcf4f2;
+  font: 12px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  text-decoration: none;
+}
+
+.fallback-link:hover {
+  color: #3d341d;
+  background: #fff;
+}
+
+.fallback-link:focus-visible {
+  outline: 3px solid #3a89ae;
+  outline-offset: 3px;
+}
