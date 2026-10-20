@@ -1,0 +1,59 @@
+:root{color-scheme:light;--cream:#fffaf0;--navy:#243550;--muted:#718096;--orange:#fa9e00;--line:#e4e8ef;--green:#178866;--red:#a83930;font-family:Inter,"Avenir Next",Avenir,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--navy);line-height:1.6}
+button,input{font:inherit}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:3px}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible{outline:3px solid #3aaed1;outline-offset:4px}
+[hidden]{display:none!important}
+.portal-shell{max-width:560px;margin:0 auto;padding:22px 16px 18px}
+.portal-header{display:flex;flex-direction:column;align-items:center;gap:10px}
+.brand-logo{width:310px;max-width:95%;height:auto;display:block}
+.private-badge{font-size:10px;line-height:1.4;color:#7a7f87;border:1px solid #e8e2d6;border-radius:20px;padding:3px 9px}
+.lookup-section{margin:24px auto 0}
+.intro{text-align:center}
+.activity-label{font-size:11px;font-weight:800;letter-spacing:.14em;color:#ad731a}
+h1{font-size:32px;line-height:1.2;letter-spacing:-.035em;margin:9px 0 9px;font-weight:800}
+.intro p{font-size:13px;color:var(--muted);margin:0 0 12px;line-height:1.5}
+.week-badge{display:inline-block;border-radius:7px;background:#f1e6cf;font-size:12px;color:#805a21;padding:2px 10px}
+.lookup-card{margin-top:19px;padding:20px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 4px 16px rgba(36,53,80,.025)}
+.lookup-card label{display:block;font-size:17px;font-weight:800}
+.field-hint{margin:3px 0 13px;color:var(--muted);font-size:12px;line-height:1.5}
+.lookup-row{display:flex;flex-direction:column;gap:10px}
+.lookup-row input{width:100%;min-width:0;min-height:48px;padding:10px 13px;border:1.5px solid #dde2e9;border-radius:10px;color:var(--navy);background:#f8fafc;letter-spacing:.025em;font-size:16px;line-height:1.5}
+.lookup-row input:focus{border-color:#d99a32;outline:3px solid #fff1d1}
+.lookup-row input[aria-invalid="true"]{border-color:var(--red)}
+.lookup-row input::placeholder{letter-spacing:0;color:#8793a6;font-size:14px}
+.lookup-button{width:100%;min-height:46px;border:0;border-radius:10px;background:var(--orange);color:#243550;padding:9px 16px;font-size:15px;font-weight:800;line-height:1.5}
+.lookup-button:disabled{opacity:.6;cursor:wait}
+.lookup-button span{margin-left:7px;font-size:18px}
+.lookup-message{min-height:18px;margin:8px 0 0;color:var(--muted);font-size:12px;line-height:1.5}
+.lookup-message.error{color:var(--red)}
+.lookup-message.success{color:var(--green)}
+.fixed-report-note{display:flex;align-items:flex-start;gap:8px;margin:13px 2px 0;color:var(--muted);font-size:11px;line-height:1.6}
+.fixed-report-note svg{flex:0 0 16px;width:16px;height:16px;margin-top:1px;fill:none;stroke:#a77724;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.number-guide{border-top:1px solid #e8dfce;margin-top:21px;padding-top:17px;font-size:12px}
+.number-guide h2{font-size:16px;line-height:1.4;margin:0;font-weight:800;letter-spacing:-.015em}
+.number-guide ol{padding-left:21px;margin:10px 0 14px;color:var(--muted)}
+.number-guide li{margin-top:6px;padding-left:2px}
+.number-guide strong{color:var(--navy);font-weight:700}
+.number-guide a{color:#805a21}
+.guide-example{margin:0}
+.guide-image-crop{position:relative;aspect-ratio:640 / 260;overflow:hidden;border:1px solid #e1e5eb;border-radius:10px;background:#fff}
+.guide-image-crop img{position:absolute;width:312.5%;max-width:none;height:auto;left:-96.875%;top:-111.538%;display:block}
+.guide-example figcaption{font-size:10px;line-height:1.5;color:#8590a2;margin-top:7px}
+.full-guide-link{display:inline-flex;align-items:center;min-height:44px;margin-top:2px;font-size:12px;font-weight:700}
+.portal-footer{margin-top:20px;padding-top:11px;text-align:center;font-size:10px;color:#8590a2;line-height:1.5}
+/* Shared report-page controls; the lookup page itself contains no report iframe. */
+.report-section{margin-top:24px;padding-top:20px;border-top:1px solid #e6dfd1}
+.report-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:8px}
+.report-toolbar h2{margin:0;font-size:21px;line-height:1.4;letter-spacing:-.025em}
+.report-toolbar h2:focus{outline:none}
+.another-student{display:inline-flex;align-items:center;justify-content:center;min-height:44px;background:#fff;border:1px solid #e1e5ea;border-radius:9px;color:#5b6a82;padding:8px 13px;font-size:12px;font-weight:700;text-decoration:none}
+.report-status{margin:0 0 12px;color:var(--muted);font-size:13px;min-height:21px}
+.report-status.error{color:var(--red)}
+.report-frame{display:block;width:100%;height:1900px;border:0;background:var(--cream);border-radius:16px}
+@media(min-width:601px){.portal-shell{padding-top:32px;padding-bottom:24px}.lookup-section{margin-top:28px}.lookup-card{padding:22px}.number-guide{font-size:13px}.number-guide h2{font-size:17px}}
+@media(max-width:360px){.portal-shell{padding-left:14px;padding-right:14px}.brand-logo{width:270px}h1{font-size:28px}.lookup-card{padding:17px}.field-hint{font-size:11px}.intro p{font-size:12px}}
+@media(max-width:600px){.report-toolbar{align-items:flex-start;flex-direction:column;gap:10px}.report-toolbar h2{font-size:19px}.report-frame{height:2800px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

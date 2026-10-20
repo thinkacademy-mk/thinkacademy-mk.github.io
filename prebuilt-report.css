@@ -1,0 +1,159 @@
+/* Progressive enhancement of fully prebuilt, fixed child reports. */
+.route-wrap .prebuilt-route{width:100%;height:auto;overflow:visible;font-family:inherit}
+.route-wrap .prebuilt-route-mobile{display:none}
+.route-wrap .prebuilt-route .route-node{cursor:default;pointer-events:none}
+.route-wrap .prebuilt-route .route-week{font-size:15px;font-weight:800;letter-spacing:1px}
+.route-wrap .prebuilt-route .route-week-note{font-size:12px;font-weight:500;letter-spacing:0}
+.route-wrap .prebuilt-route .route-node text{font-size:12px}
+.route-wrap .prebuilt-route .route-bonus text{font-size:11px}
+.prebuilt-leaderboard [data-rank-gap]{display:none}
+.prebuilt-enhanced .prebuilt-leaderboard:not([data-leaderboard-expanded="true"]) [data-rank-collapsed="true"]{display:none}
+.prebuilt-enhanced .prebuilt-leaderboard:not([data-leaderboard-expanded="true"]) [data-rank-gap]{display:table-row}
+.rank-gap button{min-width:64px;min-height:44px;padding:0 14px;border:0;border-radius:0;background:transparent;box-shadow:none;font-size:25px;color:#8d6c31}
+.rank-gap button:hover{border:0;background:transparent;color:#533b16}
+@media(max-width:600px){
+  .route-wrap .prebuilt-route-desktop{display:none}
+  .route-wrap .prebuilt-route-mobile{display:block}
+  .route-wrap .prebuilt-route .route-week{font-size:36px}
+  .route-wrap .prebuilt-route .route-week-note{font-size:28px}
+  .route-wrap .prebuilt-route .route-node text{font-size:26px}
+  .route-wrap .prebuilt-route .route-bonus text{font-size:22px}
+}
+@media(max-width:360px){
+  .route-wrap .prebuilt-route .route-week{font-size:40px}
+  .route-wrap .prebuilt-route .route-week-note{font-size:30px}
+  .route-wrap .prebuilt-route .route-node text{font-size:32px}
+  .route-wrap .prebuilt-route .route-bonus text{font-size:28px}
+}
+
+/* ===== v2 layout (2026-10-06): week-by-week progress grid + phone clean-up ===== */
+/* Header: child name first, report name second */
+.report-header h1{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin:0 0 12px}
+.report-header h1 .rt-kid{color:var(--ink);margin:0;font-size:32px;line-height:1.2;letter-spacing:-.6px}
+.report-header h1 .rt-sub{margin:0;font-size:16px;font-weight:600;line-height:1.45;color:var(--muted);letter-spacing:0}
+.report-scope{font-size:13px}
+
+/* Section top: title left, progress chip right, chip aligned to the title */
+.journey .section-top{align-items:flex-start}
+.journey-progress .progress-chip{margin-top:0}
+.section-number{display:none}
+.section-top p,.legend{font-size:13px}
+.legend{gap:8px 18px;margin:14px 0 6px}
+
+/* Progress grid */
+.route-wrap.pg{margin:8px 0 18px;display:flex;flex-direction:column;gap:10px}
+.pg-week{border:1px solid var(--line);border-radius:16px;padding:14px 16px 12px;background:#fbfcfd}
+.pg-week.complete{background:#f2faf5;border-color:#cfe9da}
+.pg-week.started{background:#fffaf0;border-color:#f0dfb6}
+.pg-head{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
+.pg-head b{font-size:15px;letter-spacing:.4px}
+.pg-head span{font-size:13px;color:var(--muted)}
+.pg-head em{margin-left:auto;font-style:normal;font-size:13px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums}
+.pg-week.complete .pg-head em{color:var(--green)}
+.pg-days{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+.pg-day{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
+.pg-day::after{content:"";position:absolute;top:21px;left:calc(50% + 22px);right:calc(-50% + 22px);height:4px;border-radius:2px;background:#e3e8ee}
+.pg-day:last-child::after{display:none}
+.pg-day.linked::after{background:#85c9a6}
+.pg-dot{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#eef0f4;border:2px solid #d7dfe8;color:#94a1b3}
+.pg-dot svg{width:22px;height:22px}
+.pg-day.done .pg-dot{background:var(--green);border-color:var(--green);color:#fff}
+.pg-day.ready .pg-dot{background:#fff5d8;border-color:#d4a84a;color:#a77a20}
+.pg-num{font-size:13px;font-weight:700;color:#8c97a7;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pg-day.done .pg-num{color:var(--green)}
+.pg-day.ready .pg-num{color:#916c1d}
+
+/* Score: current-score block, button below the figures */
+.score-total{flex-wrap:wrap}
+.rank-note,.rank-data{font-size:12px}
+
+@media(max-width:600px){
+  main{padding:18px 16px 28px}
+  .report-header{gap:14px;margin-bottom:6px}
+  .report-logo{width:190px}
+  .report-header h1 .rt-kid{font-size:26px}
+  .report-header h1 .rt-sub{font-size:14px}
+  .card,.journey{padding:18px 16px;border-radius:18px;margin:14px 0}
+  h2{font-size:20px}
+  .section-top p,.legend{font-size:12px}
+  .week-state{font-size:11px}
+  .progress-chip{font-size:12px}
+  .route-wrap.pg{gap:8px}
+  .pg-week{padding:12px 10px 10px;border-radius:14px}
+  .pg-head{margin-bottom:10px;gap:8px}
+  .pg-head b{font-size:14px}
+  .pg-head span{font-size:12px}
+  .pg-dot{width:32px;height:32px;border-width:1.5px}
+  .pg-dot svg{width:16px;height:16px}
+  .pg-day{gap:4px}
+  .pg-day::after{top:15px;left:calc(50% + 16px);right:calc(-50% + 16px);height:3px}
+  .pg-num{font-size:12px}
+  .pg-day-word{display:none}
+  /* points: the active card full width, the two upcoming ones side by side */
+  .points-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .point-card.active{grid-column:1/-1;display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:12px}
+  .point-card.active .point-count{margin:0;grid-row:1/3;grid-column:2}
+  .point-card.active p{margin:4px 0 0}
+  .point-card.active .mini-track{grid-column:1/-1}
+  .point-card{padding:12px}
+  .point-type{font-size:12px}
+  .soon{font-size:13px;margin:10px 0 6px}
+  .point-card p{font-size:11px}
+  .score-total{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 12px;padding:16px}
+  .score-total>div:first-child,.score-total .score-caption{display:contents}
+  .score-caption>span{grid-column:1;grid-row:1;font-size:14px}
+  .score-total .score-figure{grid-column:2;grid-row:1;text-align:right}
+  #score-equation{grid-column:1/-1;grid-row:2;margin:0;font-size:12px}
+  .score-total .score-review{grid-column:1/-1;grid-row:3;display:flex;justify-content:center;margin:4px 0 0;padding:10px;font-size:13px}
+  .ranking-head h3{font-size:16px}
+  .ranking-head p,#rank-chip{font-size:11px}
+  .rank-note,.rank-data{font-size:11.5px;line-height:1.65}
+  .champion-kicker{font-size:10px}
+  .champion-reward p{font-size:12px}
+  .champion-reward small{font-size:11px}
+}
+@media(max-width:360px){
+  .pg-dot{width:28px;height:28px}
+  .pg-day::after{top:13px;left:calc(50% + 14px);right:calc(-50% + 14px)}
+  .pg-num{font-size:11px}
+}
+
+/* One prebuilt entry per student, with a level choice only when needed. */
+.level-choice-main{max-width:620px}.level-choice-card h1{display:block;font-size:28px;margin:0 0 9px}.level-choice-card>p{font-size:14px;color:var(--muted);margin:0 0 20px}.level-choices{display:grid;gap:12px}.level-choice{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px;border:1px solid var(--line);border-radius:14px;text-decoration:none;color:var(--ink);background:#fbfcfd;min-height:88px}.level-choice:hover{background:#fff5d8;border-color:#d4a84a}.level-choice b{display:block;font-size:18px}.level-choice small{display:block;margin-top:5px;font-size:12px;color:var(--muted)}.level-choice-arrow{font-size:25px;color:#a77a20}.level-choice-card .level-choice-note{font-size:12px;margin:20px 0 0}.level-choice-return{margin:0 0 14px}.level-choice-return a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;font-size:13px;font-weight:700;color:#806329}@media(max-width:600px){.level-choice-card h1{font-size:25px}.level-choice{padding:16px}.level-choice-card>p{font-size:13px}}
+
+/* One continuous snake route, measured from each week rather than fixed page positions. */
+.challenge-map{position:relative;isolation:isolate}
+.challenge-map .route-wrap.pg{margin:8px 0 0;gap:var(--pg-gap)}
+.challenge-map{--pg-gap:10px;--pg-pad-top:14px;--pg-pad-side:16px;--pg-pad-bottom:12px;--pg-head-gap:12px;--pg-dot-size:44px;--pg-road:4px;--pg-road-color:#dce3ec;--pg-turn-radius:20px}
+.challenge-map .pg-week{position:relative;padding:var(--pg-pad-top) var(--pg-pad-side) var(--pg-pad-bottom);overflow:visible}
+.challenge-map .pg-head{position:relative;margin-bottom:var(--pg-head-gap)}
+.challenge-map .pg-lane{position:relative}
+.challenge-map .pg-dot{position:relative;z-index:2;width:var(--pg-dot-size);height:var(--pg-dot-size)}
+.challenge-map .pg-day::after{top:calc(var(--pg-dot-size)/2 - var(--pg-road)/2);left:calc(50% + var(--pg-dot-size)/2);right:calc(-50% + var(--pg-dot-size)/2);height:var(--pg-road);background:var(--pg-road-color)}
+.challenge-map .pg-day.linked::after{background:#85c9a6}
+.challenge-map .pg-route-reverse .pg-days{direction:rtl}
+.challenge-map .pg-route-reverse .pg-day{direction:ltr}
+.challenge-map .pg-route-reverse .pg-day::after{left:calc(-50% + var(--pg-dot-size)/2);right:calc(50% + var(--pg-dot-size)/2)}
+.challenge-map .pg-entry-rail,.challenge-map .pg-exit-rail{position:absolute;display:block;pointer-events:none;width:calc(100% / 14 + var(--pg-pad-side));border-color:var(--pg-road-color);border-style:solid;border-width:0;z-index:1}
+.challenge-map .pg-exit-rail{top:calc(var(--pg-dot-size)/2 - var(--pg-road)/2);bottom:calc(-1 * (var(--pg-pad-bottom) + var(--pg-gap)));border-top-width:var(--pg-road)}
+.challenge-map .pg-route-last.pg-route-forward .pg-exit-rail{bottom:calc(-1 * (var(--pg-pad-bottom) + var(--pg-gap) + 2px + var(--pg-road)));border-bottom-width:var(--pg-road);border-bottom-right-radius:var(--pg-turn-radius)}
+.challenge-map .pg-route-forward .pg-exit-rail{right:calc(-1 * var(--pg-pad-side));border-right-width:var(--pg-road);border-top-right-radius:20px}
+.challenge-map .pg-route-reverse .pg-exit-rail{left:calc(-1 * var(--pg-pad-side));border-left-width:var(--pg-road);border-top-left-radius:20px}
+.challenge-map .pg-entry-rail{top:calc(-1 * (var(--pg-pad-top) + var(--pg-gap)));bottom:calc(-1 * (var(--pg-head-gap) + var(--pg-dot-size)/2 + var(--pg-road)/2));border-bottom-width:var(--pg-road)}
+.challenge-map .pg-route-reverse .pg-entry-rail{right:calc(-1 * var(--pg-pad-side));border-right-width:var(--pg-road);border-bottom-right-radius:20px}
+.challenge-map .pg-route-forward .pg-entry-rail{left:calc(-1 * var(--pg-pad-side));border-left-width:var(--pg-road);border-bottom-left-radius:20px}
+.challenge-map .finish-destination{position:relative;margin-top:28px;background:linear-gradient(135deg,#fff9e7,#fff3cd);border-color:#e6c878;box-shadow:0 4px 15px #bc8f1b0a}
+.challenge-map .finish-destination::before{content:"";position:absolute;pointer-events:none;left:50%;right:calc(var(--pg-turn-radius) - 3px);top:-18px;height:18px;border-top:var(--pg-road) solid var(--pg-road-color);border-left:var(--pg-road) solid var(--pg-road-color);border-top-left-radius:18px;z-index:-1}
+.challenge-map .finish-destination::after{content:"";position:absolute;left:calc(50% - 7px);top:-5px;width:10px;height:10px;border:2px solid #d4a84a;border-radius:50%;background:#fff5d8}
+.challenge-map .finish-destination>svg{filter:none;opacity:1}
+@media(max-width:600px){
+  .challenge-map{--pg-gap:8px;--pg-pad-top:12px;--pg-pad-side:10px;--pg-pad-bottom:10px;--pg-head-gap:10px;--pg-dot-size:32px;--pg-road:3px;--pg-turn-radius:14px}
+  .challenge-map .finish-destination{margin-top:26px}
+  .challenge-map .finish-destination::before{top:-18px;height:18px}
+  .challenge-map .pg-entry-rail,.challenge-map .pg-exit-rail{border-radius:14px}
+  .challenge-map .pg-route-forward .pg-exit-rail{border-top-left-radius:0;border-bottom-left-radius:0;border-bottom-right-radius:0}
+  .challenge-map .pg-route-reverse .pg-exit-rail{border-top-right-radius:0;border-bottom-left-radius:0;border-bottom-right-radius:0}
+  .challenge-map .pg-route-reverse .pg-entry-rail{border-top-left-radius:0;border-top-right-radius:0;border-bottom-left-radius:0}
+  .challenge-map .pg-route-forward .pg-entry-rail{border-top-left-radius:0;border-top-right-radius:0;border-bottom-right-radius:0}
+}
+@media(max-width:360px){.challenge-map{--pg-dot-size:28px}}

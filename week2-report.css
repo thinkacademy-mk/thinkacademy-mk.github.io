@@ -1,0 +1,146 @@
+/* Local Week 2 preview. Load after the unchanged weekly and prebuilt styles. */
+.challenge-map .progress-grid{margin:8px 0 0;display:flex;flex-direction:column;gap:var(--pg-gap)}
+.challenge-map .pg-week-head{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:var(--pg-head-gap)}
+.pg-week-title,.pg-week-summary{display:flex;flex-direction:column;gap:3px;min-width:0}
+.pg-week-main{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:3px 10px;min-width:0}
+.pg-week-main .pg-week-title{display:block;grid-column:1;grid-row:1}
+.pg-week-main .pg-week-points{grid-column:1;grid-row:2;font-size:12px;font-weight:500;letter-spacing:0;color:var(--muted);white-space:nowrap}
+.pg-week-head .pg-week-title{font-size:15px;font-weight:800;letter-spacing:.3px;color:var(--ink)}
+.pg-week-title .pg-week-points{font-size:12px;font-weight:500;letter-spacing:0;color:var(--muted)}
+.pg-week-summary{align-items:flex-end;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pg-week-summary strong{font-size:14px;font-weight:800;color:var(--green)}
+.pg-week-summary small{font-size:11px;font-weight:500;color:var(--muted)}
+.pg-week.locked .pg-week-summary strong{font-size:12px;color:var(--muted)}
+.pg-topics-toggle{grid-column:2;grid-row:1/3;align-self:center;display:grid;place-items:center;width:28px;min-height:28px;padding:7px;border:0;border-radius:50%;background:transparent;color:var(--green);cursor:pointer}
+.pg-topics-toggle svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;transition:transform .15s ease}
+.pg-topics-toggle:hover{background:#2184610d}
+.pg-topics-toggle:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.pg-topics-toggle[aria-expanded="true"] svg{transform:rotate(180deg)}
+.pg-topics-toggle:disabled{background:transparent;color:#a0aaba;cursor:default}
+
+/* Topic names stay in a chronological, single-column list at every width. */
+.pg-topic-panel{margin-top:12px;padding-top:11px;border-top:1px solid #dfe7e9}
+.pg-topic-panel[hidden]{display:none!important}
+.pg-topic-days{list-style:none;display:grid;grid-template-columns:minmax(0,1fr);gap:8px;margin:0;padding:0;direction:ltr}
+.pg-topic-day{display:grid;grid-template-columns:30px minmax(0,1fr);align-items:start;gap:7px;direction:ltr;padding:0;min-width:0;text-align:left}
+.pg-topic-day-label{display:block;font-size:12px;font-weight:750;line-height:1.5;color:#526b7b;font-variant-numeric:tabular-nums}
+.pg-topic-name{display:block;font-size:12px;font-weight:500;line-height:1.5;color:#6b7c85;overflow-wrap:break-word}
+.pg-route-reverse .pg-topic-days{direction:ltr}
+
+/* Each day remains on the existing route. The anchor includes its day label. */
+.challenge-map .pg-day{gap:0}
+.pg-node{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:6px;width:100%;min-height:44px;border-radius:9px;color:inherit;text-decoration:none;-webkit-tap-highlight-color:#d9f1e3}
+a.pg-node{cursor:pointer}
+a.pg-node:hover .pg-dot{box-shadow:0 0 0 3px #21846112}
+a.pg-node:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.challenge-map .pg-dot{flex:none}
+.pg-day.done{--score-ink:#19634a;--score-track:#dcece3}
+.pg-day.score-level-0{--score-fill:linear-gradient(135deg,#f7fcf9,#edf6f0);--score-ring:#a4cdb7}
+.pg-day.score-level-1{--score-fill:linear-gradient(135deg,#f4fbf7,#e5f4eb);--score-ring:#8ec4a8}
+.pg-day.score-level-2{--score-fill:linear-gradient(135deg,#eff9f3,#daefe3);--score-ring:#73b594}
+.pg-day.score-level-3{--score-fill:linear-gradient(135deg,#e8f7ef,#cfeadb);--score-ring:#55a681}
+.pg-day.score-level-4{--score-fill:linear-gradient(135deg,#e0f4e9,#c4e6d3);--score-ring:#37946e}
+.pg-day.score-level-5{--score-fill:linear-gradient(135deg,#d6f0e2,#b5dec8);--score-ring:#218461}
+.challenge-map .pg-day.done .pg-dot{position:relative;background:var(--score-fill,#fff);border:0;color:var(--score-ink,var(--green))}
+.pg-score{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:14px;font-weight:750;line-height:1;font-variant-numeric:tabular-nums;text-align:center}
+.pg-score-unit{font-size:7px;font-weight:500;line-height:1;letter-spacing:.15px}
+.challenge-map .pg-dot .pg-score-ring{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.pg-score-ring circle{fill:none;stroke-width:3}
+.pg-score-ring .pg-ring-track{stroke:var(--score-track,#dceee3)}
+.pg-score-ring .pg-ring-value{stroke:var(--score-ring,var(--green));stroke-width:3.5;stroke-linecap:round;transform:rotate(-90deg);transform-origin:20px 20px}
+.pg-score-ring .pg-ring-value[stroke-dasharray^="0 "]{opacity:0}
+.pg-score-ring .pg-ring-zero{fill:#218461;stroke:none}
+.pg-day-label{display:flex;align-items:center;justify-content:center;gap:0;white-space:nowrap;font-size:12px;font-weight:650;line-height:1.3;font-variant-numeric:tabular-nums;color:#8c97a7}
+.pg-day-label>svg{width:10px;height:10px;margin-right:3px;flex:none}
+.pg-day-label .pg-day-word{margin-right:3px}
+.pg-day-short{display:none}
+.pg-day.done .pg-day-label{color:var(--green)}
+.pg-day.ready .pg-day-label{color:#916c1d}
+.pg-node .pg-dot>svg:not(.pg-score-ring){width:20px;height:20px}
+
+/* Week 2 can be current while Week 1 retains its earned score. */
+.point-card.current-week{background:#fff5df;border-color:#e9c67e}
+.point-card.current-week .mini-track{background:#efdfb8}
+.points-grid .point-card .point-count{font-variant-numeric:tabular-nums}
+.preview-extra[hidden],#ranking-body .rank-gap[hidden]{display:none!important}
+#ranking-body [data-rank-gap]:not([hidden]){display:table-row}
+
+/* Official MK artwork keeps the early booking card recognizable and compact. */
+.progress-trial-card{padding:14px;margin:22px 0;border:1px solid #d8e6ef;border-radius:20px;background:linear-gradient(135deg,#f2f8ff,#fff8e8)}
+.progress-trial-accessible-title{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.progress-trial-poster{display:grid;grid-template-columns:minmax(0,1.479532fr) minmax(0,1.229630fr);gap:10px;align-items:start}
+.progress-trial-half{min-width:0;overflow:hidden;border-radius:10px;background:white}
+.progress-trial-half img{display:block;width:100%;height:auto;max-width:100%}
+.progress-trial-link{display:flex;align-items:center;justify-content:center;gap:10px;min-height:44px;margin-top:12px;padding:10px 17px;border-radius:10px;background:#ffc654;color:#26354b;font-size:14px;line-height:1.4;font-weight:750;text-decoration:none}
+.progress-trial-link:hover{background:#ffd77a}
+
+@media(max-width:600px){
+  .journey .section-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 10px;align-items:start}
+  .journey .section-top>div:first-child{display:contents}
+  .journey .section-top h2{grid-column:1;grid-row:1;font-size:18px;line-height:1.3;margin:0}
+  .journey .section-top #report-cutoff-note{grid-column:1/-1;grid-row:2;margin:0;line-height:1.6}
+  .journey-progress{grid-column:2;grid-row:1}
+  .journey-progress .progress-chip{padding:5px 8px;font-size:11px}
+  .journey-progress .progress-chip svg,#week-state{display:none}
+  .challenge-map{--pg-dot-size:36px}
+  .challenge-map .pg-week{padding-left:10px;padding-right:10px}
+  .challenge-map .pg-week-head{gap:8px}
+  .pg-week-head .pg-week-title{font-size:14px;letter-spacing:0}
+  .pg-week-main{gap:3px 8px}
+  .pg-week-main .pg-week-points{font-size:11px}
+  .pg-week-title .pg-week-points{font-size:11px}
+  .pg-week-summary strong{font-size:13px}
+  .pg-week-summary small{font-size:10px}
+  .pg-node{gap:5px;min-height:54px}
+  .pg-score{font-size:12px}
+  .pg-score-unit{font-size:6px}
+  .pg-day-label{font-size:10px}
+  .pg-day-label .pg-day-word{display:none}
+  .pg-day-label .pg-day-short{display:inline;margin:0}
+  .pg-day-label>svg{width:8px;height:8px;margin-right:2px}
+  .pg-node .pg-dot>svg:not(.pg-score-ring){width:18px;height:18px}
+  .pg-topic-panel{margin-top:10px;padding-top:10px}
+  .pg-topic-days,.pg-route-reverse .pg-topic-days{grid-template-columns:minmax(0,1fr);gap:8px;direction:ltr}
+  .pg-topic-day{display:grid;grid-template-columns:23px minmax(0,1fr);align-items:start;gap:5px;padding:0;text-align:left}
+  .pg-topic-day-label{display:block;font-size:10px;font-weight:750;line-height:1.5;color:#526b7b}
+  .pg-topic-name{font-size:11px;line-height:1.5}
+  .points-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:18px}
+  .points-grid .point-card.active{display:block;grid-column:auto;padding:12px}
+  .points-grid .point-card.active .point-count{grid-column:auto;grid-row:auto;margin:9px 0 3px}
+  .points-grid .point-card.active .point-count b{font-size:30px}
+  .points-grid .point-card.active .point-count span{font-size:12px}
+  .points-grid .point-card .point-type{font-size:11px}
+  .points-grid .point-card.active p{font-size:10px;line-height:1.5;margin:4px 0 0}
+  .points-grid .point-card.coming{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:4px 8px;padding:10px 12px}
+  .points-grid .point-card.coming .soon{font-size:12px;margin:0}
+  .points-grid .point-card.coming p{grid-column:1/-1;font-size:10px;line-height:1.5;margin:0}
+  .progress-trial-card{padding:12px;margin:18px 0;border-radius:18px}
+  .progress-trial-poster{gap:7px}
+  .progress-trial-half{border-radius:7px}
+  .progress-trial-link{font-size:13px}
+}
+@media(max-width:360px){
+  main{padding-left:14px;padding-right:14px}
+  .card,.journey{padding-left:14px;padding-right:14px}
+  .challenge-map{--pg-dot-size:32px;--pg-pad-side:8px}
+  .challenge-map .pg-week{padding-left:8px;padding-right:8px}
+  .pg-node{min-height:50px}
+  .pg-score{font-size:11px}
+  .pg-day-label{font-size:9px}
+  .pg-day-label>svg{width:7px;height:7px}
+  .pg-week-main{gap:3px 6px}
+  .pg-week-main .pg-week-points{font-size:10px}
+  .pg-week-summary strong{font-size:12px}
+  .pg-week-summary small{font-size:9px}
+  .pg-topic-days,.pg-route-reverse .pg-topic-days{column-gap:9px}
+  .pg-topic-day{grid-template-columns:21px minmax(0,1fr);gap:4px}
+  .pg-topic-name{font-size:10px}
+  .points-grid .point-card.active{padding:10px}
+  .points-grid .point-card.active .point-count b{font-size:27px}
+  .progress-trial-card{padding:10px}
+}
+@media print{
+  .pg-node{color:inherit}
+  a.pg-node{text-decoration:none}
+  .pg-score-ring{print-color-adjust:exact}
+}
