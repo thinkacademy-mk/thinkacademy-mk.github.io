@@ -3,6 +3,10 @@
   const siteRoot = new URL('https://emily0huayun.github.io/math-kangaroo-reports/');
   const frame = document.getElementById('report-frame');
   const fallback = document.getElementById('report-fallback');
+  const loading = document.getElementById('report-loading');
+  const loadingTitle = document.getElementById('report-loading-title');
+  const loadingMessage = document.getElementById('report-loading-message');
+  const loadingLink = document.getElementById('report-loading-link');
   const oldRoute = /^reports\/(?:weeks\/([0-9]{12})|week-([12])\/(?:level-(1-2|3-4|5-6)\/)?([0-9]{12}))\/$/;
   const finalRoute = /^reports\/week-3\/(?:level-(1-2|3-4|5-6)\/)?([0-9]{12})\/$/;
   let currentTarget;
@@ -10,6 +14,29 @@
   let pendingTarget;
   let finalRequestId = '';
   let requestSequence = 0;
+  let loadingTimer;
+  let legacyRecoveryAttempted = false;
+
+  function showLegacyLoading(target, route) {
+    clearTimeout(loadingTimer);
+    const title = route.week ? `Week ${route.week} report` : 'Earlier weekly reports';
+    document.title = `${title} · Think Academy`;
+    loading.hidden = false;
+    loading.dataset.slow = 'false';
+    loadingTitle.textContent = `Opening ${route.week ? `your Week ${route.week} report` : 'your weekly reports'}…`;
+    loadingMessage.textContent = 'Your saved report is loading.';
+    loadingLink.href = target.href;
+    loadingTimer = setTimeout(() => {
+      if (currentKind !== 'legacy' || currentTarget?.href !== target.href || loading.hidden) return;
+      loading.dataset.slow = 'true';
+      loadingMessage.textContent = 'Taking a little longer? You can open the saved report directly.';
+    }, 10000);
+  }
+
+  function hideLoading() {
+    clearTimeout(loadingTimer);
+    loading.hidden = true;
+  }
 
   function level(value) {
     if (!value) return '';
@@ -84,6 +111,7 @@
   }
 
   function reflectTarget(target, route) {
+    const changed = currentTarget?.href !== target.href;
     let branded;
     if (route.kind === 'final') branded = '/' + target.search + target.hash;
     else {
@@ -102,6 +130,11 @@
     currentTarget = target;
     currentKind = route.kind === 'final' ? 'final' : 'legacy';
     fallback.href = target.href;
+    if (currentKind === 'legacy') {
+      document.title = `${route.week ? `Week ${route.week} report` : 'Earlier weekly reports'} · Think Academy`;
+      loadingLink.href = target.href;
+      if (changed) showLegacyLoading(target, route);
+    }
   }
 
   function tellFinalLocation() {
@@ -117,8 +150,14 @@
     currentKind = kind;
     fallback.href = target.href;
     pendingTarget = target;
+    legacyRecoveryAttempted = false;
     if (kind === 'final') finalRequestId = `mk-final-${++requestSequence}`;
     else finalRequestId = '';
+    if (kind === 'legacy') showLegacyLoading(target, route);
+    else {
+      hideLoading();
+      document.title = 'Math Kangaroo Final Report · Think Academy';
+    }
     if (initial || previousKind !== kind) frame.src = target.href;
     else if (kind === 'final') tellFinalLocation();
     else frame.contentWindow.postMessage({ type: 'mk-report-location', url: target.href }, siteRoot.origin);
@@ -138,10 +177,23 @@
       target.hash === pendingTarget.hash;
   }
 
-  frame.addEventListener('load', tellFinalLocation);
+  document.getElementById('report-loading-dismiss').addEventListener('click', hideLoading);
+  frame.addEventListener('load', () => {
+    if (currentKind === 'final') tellFinalLocation();
+    else frame.contentWindow.postMessage({ type: 'mk-report-location', url: currentTarget.href }, siteRoot.origin);
+  });
   window.addEventListener('message', event => {
     if (event.origin !== siteRoot.origin || event.source !== frame.contentWindow) return;
     if (event.data?.type === 'mk-report-ready') {
+      // A restored iframe or a late final-document load must not replace an
+      // explicit Week 1/2 request. Retry that validated destination once.
+      if (currentKind === 'legacy' && pendingTarget && !legacyRecoveryAttempted && typeof event.data.url === 'string' && event.data.url.length <= 4096) {
+        const loaded = validateTarget(event.data.url);
+        if (loaded?.route.kind === 'final') {
+          legacyRecoveryAttempted = true;
+          frame.src = currentTarget.href;
+        }
+      }
       // Old weekly pages can navigate internally to the new root redirect.
       // Adopt that already loaded final document only after the legacy request
       // was acknowledged, never while a newer parent navigation is pending.
@@ -153,9 +205,17 @@
           pendingTarget = loaded.target;
           finalRequestId = `mk-final-${++requestSequence}`;
           fallback.href = loaded.target.href;
+          hideLoading();
+          document.title = 'Math Kangaroo Final Report · Think Academy';
         }
       }
       tellFinalLocation();
+      return;
+    }
+    if (event.data?.type === 'mk-report-view-ready') {
+      if (currentKind !== 'legacy' || typeof event.data.url !== 'string' || event.data.url.length > 4096) return;
+      const loaded = validateTarget(event.data.url);
+      if (loaded?.route.kind === 'legacy' && loaded.target.href === currentTarget.href) hideLoading();
       return;
     }
     if (event.data?.type !== 'mk-report-navigation' || typeof event.data.url !== 'string' || event.data.url.length > 4096) return;
